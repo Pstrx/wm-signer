@@ -154,6 +154,9 @@ class Signer:
     def md4(value):
         """
         Хэширование строки.
+
+        Стандартная библиотека `hashlib` не содержит алгоритма MD4, но он
+        есть в библиотеке `passlib`, которая устанавливается с wm-signer.
         """
 
         algorithm = hashlib.new('md4')
