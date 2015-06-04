@@ -145,7 +145,7 @@ class Signer:
     @staticmethod
     def reverse_to_decimal(value):
         """
-        Преобразованием двоичных данных в десятичную форму.
+        Преобразование двоичных данных в десятичную форму.
         """
 
         return int.from_bytes(value, byteorder='little')
