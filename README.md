@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
   ```shell
   git clone https://github.com/eg0r/wm-signer
-  cd wm-signer-master
+  cd wm-signer
   [sudo] python setup.py install
   ```
 
