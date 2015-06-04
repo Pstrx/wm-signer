@@ -1,7 +1,6 @@
 ### WebMoney Signer `0.1`
 
-**WM Signer** - это модуль, который создаёт подписи с использованием
-файла ключей WebMoney Keeper Classic.
+Модуль, который создаёт подписи с использованием файла ключей WebMoney Keeper Classic.
 
 > Предназначен для взаимодействия с программными [X-интерфейсами](http://www.webmoney.ru/rus/developers/api.shtml) WebMoney,
 > [XML-интерфейсами](http://wm.exchanger.ru/asp/rules_xml.asp) WebMoney Exchanger и др.
