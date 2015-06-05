@@ -1,4 +1,4 @@
-### WebMoney Signer `0.1`
+### WebMoney Signer `0.2`
 
 Модуль, который создаёт подписи с использованием файла ключей WebMoney Keeper Classic.
 

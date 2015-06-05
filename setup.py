@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='wm-signer',
-    version='0.1',
+    version='0.2',
     description='WebMoney Signer',
     author='Egor Smolyakov',
     author_email='egorsmkv@gmail.com',
