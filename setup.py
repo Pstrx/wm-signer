@@ -9,7 +9,6 @@ setup(
     license='MIT',
     url='https://github.com/eg0r/wm-signer',
     packages=['wm_signer'],
-    install_requires=['passlib'],
     classifiers=[
         'Intended Audience :: Developers',
         'Intended Audience :: Financial and Insurance Industry',
@@ -19,4 +18,3 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules'
     ]
 )
-

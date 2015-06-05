@@ -2,7 +2,7 @@ import hashlib
 
 from os.path import isfile
 from random import randint
-from struct import Struct, pack
+from struct import Struct, pack, error as StructException
 
 
 class SignerException(Exception):
@@ -25,11 +25,11 @@ class Signer:
         if not isfile(keys):
             raise SignerException('Файл ключей не найден: %s' % keys)
 
-        with open(keys, 'rb') as f:
-            try:
+        try:
+            with open(keys, 'rb') as f:
                 self.read_key_data(f.read())
-            except IOError:
-                raise SignerException('Ошибка чтения из файла ключей.')
+        except IOError:
+            raise SignerException('Ошибка чтения из файла ключей.')
 
     def sign(self, data):
         """
@@ -78,7 +78,7 @@ class Signer:
         }
 
         data = self.read_key_buffer(payload)
-        if not data:
+        if data is None:
             raise SignerException('Проверка хэша не удалась. '
                                   'Возможно, файл ключей поврежден.')
 
@@ -104,7 +104,7 @@ class Signer:
 
         data['buffer'] = self.encrypt_key(data['buffer'])
 
-        return data['buffer'] if self.verify_hash(data) else False
+        return data['buffer'] if self.verify_hash(data) else None
 
     def encrypt_key(self, buff):
         """
@@ -153,13 +153,11 @@ class Signer:
     @staticmethod
     def md4(value):
         """
-        Хэширование строки.
-
-        Стандартная библиотека `hashlib` не содержит алгоритма MD4, но он
-        есть в библиотеке `passlib`, которая устанавливается с wm-signer.
+        Хэширование строки алгоритмом MD4, который содержится в модуле OpenSSL.
         """
 
         algorithm = hashlib.new('md4')
+
         if isinstance(value, bytes):
             algorithm.update(value)
         else:
@@ -175,7 +173,13 @@ class Signer:
 
         s = Struct(fmt)
 
+        try:
+            unpacked = s.unpack(binary[:s.size])
+        except StructException:
+            raise SignerException('Ошибка при распаковке данных. '
+                                  'Возможно файл ключей поврежден.')
+
         if without_size:
-            return s.unpack(binary[:s.size])
+            return unpacked
         else:
-            return s.size, s.unpack(binary[:s.size])
+            return s.size, unpacked
