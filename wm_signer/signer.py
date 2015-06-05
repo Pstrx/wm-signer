@@ -2,7 +2,7 @@ import hashlib
 
 from os.path import isfile
 from random import randint
-from struct import Struct, pack, error as StructException
+from struct import Struct, pack, error
 
 
 class SignerException(Exception):
@@ -175,7 +175,7 @@ class Signer:
 
         try:
             unpacked = s.unpack(binary[:s.size])
-        except StructException:
+        except error:
             raise SignerException('Ошибка при распаковке данных. '
                                   'Возможно файл ключей поврежден.')
 
