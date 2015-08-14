@@ -1,13 +1,10 @@
 ### WebMoney Signer `0.2`
 
-Модуль, который создаёт подписи с использованием файла ключей WebMoney Keeper Classic.
+https://wiki.wmtransfer.com/projects/webmoney/wiki/WMSigner
 
-> Предназначен для взаимодействия с программными [X-интерфейсами](http://www.webmoney.ru/rus/developers/api.shtml) WebMoney,
-> [XML-интерфейсами](http://wm.exchanger.ru/asp/rules_xml.asp) WebMoney Exchanger и др.
+*Python 2/3*
 
-*На данный момент поддерживается третья версия Python.*
-
-#### Пример использования
+#### Example
 
 ```python
 from wm_signer.signer import Signer
@@ -17,27 +14,6 @@ if __name__ == '__main__':
                     keys='./data/000000000000.kwm',
                     passwd='************')
 
-    signature = signer.sign('Данные, которые будут подписаны.')
+    signature = signer.sign('data')
     print(signature)
 ```
-
-#### Установка
-
-* Через **pip**:
-  ```shell
-  [sudo] pip install wm-signer
-  ```
-
-* Из репозитория:
-
-  ```shell
-  git clone https://github.com/eg0r/wm-signer
-  cd wm-signer
-  [sudo] python setup.py install
-  ```
-
-**Файл ключей должен быть резервным, а не основным.**
-
-#### Ошибки
-
-Пожалуйста, сообщите, если обнаружите ошибку в библиотеке.

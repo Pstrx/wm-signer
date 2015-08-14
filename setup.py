@@ -4,10 +4,10 @@ setup(
     name='wm-signer',
     version='0.2',
     description='WebMoney Signer',
-    author='Egor Smolyakov',
-    author_email='egorsmkv@gmail.com',
+    author='discort',
+    author_email='odiscort@gmail.com',
     license='MIT',
-    url='https://github.com/eg0r/wm-signer',
+    url='https://github.com/discort/wm-signer',
     packages=['wm_signer'],
     classifiers=[
         'Intended Audience :: Developers',

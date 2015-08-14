@@ -1,15 +1,28 @@
+# -*- coding: utf8 -*-
 import hashlib
+import sys
 
 from os.path import isfile
 from random import randint
 from struct import Struct, pack, error
 
 
+PY2 = sys.version_info[0] == 2
+PY3 = sys.version_info[0] == 3
+
+if PY3:
+    int_from_bytes = lambda val: int.from_bytes(val, byteorder='little')
+
+else:
+    int_from_bytes = lambda val: int(val[::-1].encode('hex'), 16)
+    bytes = bytearray
+
+
 class SignerException(Exception):
     pass
 
 
-class Signer:
+class Signer(object):
 
     power = None
     modulus = None
@@ -113,7 +126,7 @@ class Signer:
 
         digest = self.md4(self.wmid + self.passwd)
 
-        return self.xor_strings(list(buff), list(digest), 6)
+        return self.xor_strings(list(bytearray(buff)), list(bytearray(digest)), 6)
 
     def verify_hash(self, data):
         """
@@ -148,7 +161,7 @@ class Signer:
         Преобразование двоичных данных в десятичную форму.
         """
 
-        return int.from_bytes(value, byteorder='little')
+        return int_from_bytes(value)
 
     @staticmethod
     def md4(value):
